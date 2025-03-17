@@ -3,80 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Список заявок</title>
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-app.js";
-        import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore.js";
-
-        const firebaseConfig = {
-  apiKey: "AIzaSyDjLixFTkSe-ZMa2eU3gtI2anoS8ZaGMu4",
-  authDomain: "dostargazelle.firebaseapp.com",
-  databaseURL: "https://dostargazelle-default-rtdb.firebaseio.com",  // ← добавлено!
-  projectId: "dostargazelle",
-  storageBucket: "dostargazelle.appspot.com", // ← исправлено, должно быть appspot.com
-  messagingSenderId: "392932286249",
-  appId: "1:392932286249:web:14f4ff7c05e6d23f5ca138",
-  measurementId: "G-3JG8R2P9WF"
-};
-
-
-    
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
-
-        async function loadSubmissions() {
-            const querySnapshot = await getDocs(collection(db, "submissions"));
-            querySnapshot.forEach((doc) => {
-                const data = doc.data();
-                if (data.approved) {
-                    document.body.innerHTML += `<p>${data.text}</p><img src="${data.imageUrl}" width="200">`;
-                }
-            });
-        }
-        loadSubmissions();
-    </script>
+    <title>Одобренные заявки</title>
 </head>
 <body>
     <h1>Одобренные заявки</h1>
-    <!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Проверка Firebase</title>
-</head>
-<body>
-    <h1>Проверяем Firebase</h1>
-    <div id="output">Здесь появятся данные...</div>
+    <div id="applications">Загрузка...</div>
 
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
-
-        const firebaseConfig = {
-  apiKey: "AIzaSyDjLixFTkSe-ZMa2eU3gtI2anoS8ZaGMu4",
-  authDomain: "dostargazelle.firebaseapp.com",
-  databaseURL: "https://dostargazelle-default-rtdb.firebaseio.com",  // ← добавлено!
-  projectId: "dostargazelle",
-  storageBucket: "dostargazelle.appspot.com", // ← исправлено, должно быть appspot.com
-  messagingSenderId: "392932286249",
-  appId: "1:392932286249:web:14f4ff7c05e6d23f5ca138",
-  measurementId: "G-3JG8R2P9WF"
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const db = getDatabase(app);
-        const dataRef = ref(db, "approved");
-
-        onValue(dataRef, (snapshot) => {
-            const data = snapshot.val();
-            const output = document.getElementById("output");
-            output.innerHTML = JSON.stringify(data, null, 2);
-        });
+    <script>
+        fetch("AKfycbzCCug-TGER3j5WSJgkkndCIX3ngXx0sI8wdzIJetiCXjqaoSc54quZUjvQTRprxH1w") 
+            .then(response => response.json())
+            .then(data => {
+                let container = document.getElementById("applications");
+                container.innerHTML = "";
+                data.forEach(item => {
+                    container.innerHTML += `<p><strong>${item.name}</strong><br>
+                                            <img src="${item.photo}" width="200"></p>`;
+                });
+            })
+            .catch(error => console.error("Ошибка загрузки:", error));
     </script>
 </body>
 </html>
-
-</body>
-</html>
-
