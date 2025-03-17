@@ -9,13 +9,16 @@
         import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore.js";
 
         const firebaseConfig = {
-             apiKey: "AIzaSyDjLixFTkSe-ZMa2eU3gtI2anoS8ZaGMu4",
-              authDomain: "dostargazelle.firebaseapp.com",
-              projectId: "dostargazelle",
-              storageBucket: "dostargazelle.firebasestorage.app",
-              messagingSenderId: "392932286249",
-                appId: "1:392932286249:web:14f4ff7c05e6d23f5ca138",
-                 measurementId: "G-3JG8R2P9WF"
+  apiKey: "AIzaSyDjLixFTkSe-ZMa2eU3gtI2anoS8ZaGMu4",
+  authDomain: "dostargazelle.firebaseapp.com",
+  databaseURL: "https://dostargazelle-default-rtdb.firebaseio.com",  // ← добавлено!
+  projectId: "dostargazelle",
+  storageBucket: "dostargazelle.appspot.com", // ← исправлено, должно быть appspot.com
+  messagingSenderId: "392932286249",
+  appId: "1:392932286249:web:14f4ff7c05e6d23f5ca138",
+  measurementId: "G-3JG8R2P9WF"
+};
+
 
         };
         const app = initializeApp(firebaseConfig);
