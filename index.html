@@ -35,6 +35,44 @@
 </head>
 <body>
     <h1>Одобренные заявки</h1>
+    <!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Проверка Firebase</title>
+</head>
+<body>
+    <h1>Проверяем Firebase</h1>
+    <div id="output">Здесь появятся данные...</div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+
+        const firebaseConfig = {
+            apiKey: "ТВОЙ_API_KEY",
+            authDomain: "ТВОЙ_AUTH_DOMAIN",
+            databaseURL: "ТВОЙ_DATABASE_URL",
+            projectId: "ТВОЙ_PROJECT_ID",
+            storageBucket: "ТВОЙ_STORAGE_BUCKET",
+            messagingSenderId: "ТВОЙ_MESSAGING_SENDER_ID",
+            appId: "ТВОЙ_APP_ID"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+        const dataRef = ref(db, "approved");
+
+        onValue(dataRef, (snapshot) => {
+            const data = snapshot.val();
+            const output = document.getElementById("output");
+            output.innerHTML = JSON.stringify(data, null, 2);
+        });
+    </script>
+</body>
+</html>
+
 </body>
 </html>
 
