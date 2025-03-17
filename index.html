@@ -1,26 +1,25 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Одобренные заявки</title>
-</head>
-<body>
-    <h1>Одобренные заявки</h1>
-    <div id="applications">Загрузепреепепепка...</div>
+<h2>Одобренные заявки</h2>
+<div id="applications">Здесь появятся данные...</div>
 
-    <script>
-        fetch("https://script.google.com/macros/s/AKfycbyQc392PxbXr4wMO-3S8k7hL8LZUV2kWOj66Xr8MTpYEdqK7WtBSii0SKN8qpXLzb-O/exec") 
+<!-- Кнопка для перехода на страницу подачи заявки -->
+<button onclick="location.href='submit.html'">Подать заявку</button>
+
+<script>
+    const scriptURL = "https://script.google.com/macros/s/AKfycbyQc392PxbXr4wMO-3S8k7hL8LZUV2kWOj66Xr8MTpYEdqK7WtBSii0SKN8qpXLzb-O/exec";
+
+    function loadApplications() {
+        fetch(scriptURL)
             .then(response => response.json())
             .then(data => {
                 let container = document.getElementById("applications");
                 container.innerHTML = "";
                 data.forEach(item => {
-                    container.innerHTML += `<p><strong>${item.name}</strong><br>
+                    container.innerHTML += `<p><strong>${item.name}</strong> (${item.phone})<br>
                                             <img src="${item.photo}" width="200"></p>`;
                 });
             })
-            .catch(error => console.error("Ошибка загрузки:", error));
-    </script>
-</body>
-</html>
+            .catch(error => console.error("Ошибка загрузки данных:", error));
+    }
+
+    loadApplications();
+</script>
